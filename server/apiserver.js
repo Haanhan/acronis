@@ -4,7 +4,7 @@ const cors = require('cors');
 const {getTodo, getAllTodos , updateTodo, deleteTodo, insertTodo} = require("./apitasks");
 
 const app = express();
-
+app.use(express.json());
 app.use(cors());
 // app.use(history());
 

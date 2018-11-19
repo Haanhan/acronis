@@ -35,10 +35,12 @@ const deleteTodo = id => {
 
 const insertTodo = todo => {
     const id = db.get("todoIdInc").value();
-    db.update("todoIdInc", n => n+1);
-    return db.set("todo", {...todo, id})
+    db.update("todoIdInc", n => n+1).write();
+    todo = {...todo, id};
+    return db.get("todos")
+        .push(todo)
         .write()
-        .value();
+        .find(x => x.id === id)
 }
 
 module.exports = {
