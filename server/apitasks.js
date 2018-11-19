@@ -9,32 +9,29 @@ db.defaults({ todos: [], todoIdInc: 1 })
 
 
 const getAllTodos = () => {
-    return db.get("todos")
-        .value();
+    return db.get("todos");
 }
 
 const getTodo = id => {
     return db.get("todos")
-        .find({id})
-        .value();
+        .find({id});
 }
 
 const updateTodo = todo => {
     return db.get("todos")
-        .find(id)
+        .find({id: todo.id})
         .assign(todo)
-        .write()
-        .value();
+        .write();
 }
 
 const deleteTodo = id => {
     db.get("todos")
-        .remove(id)
+        .remove({id})
         .write()
 }
 
 const insertTodo = todo => {
-    const id = db.get("todoIdInc").value();
+    const id = db.get("todoIdInc").value() + "";
     db.update("todoIdInc", n => n+1).write();
     todo = {...todo, id};
     return db.get("todos")

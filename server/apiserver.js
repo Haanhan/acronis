@@ -25,11 +25,13 @@ app.delete("/api/todo/:id", (req, res) => {
 
 app.put("/api/todo", (req, res) => {
     const todo = updateTodo(req.body);
+    todo.text = todo.text.trim();
     res.status(200).send(todo);
 })
 
 app.post("/api/todo", (req, res) => {
-    const todo = insertTodo(req.body);
+    let todo = insertTodo(req.body);
+    todo.text = todo.text.trim();
     res.status(200).send(todo);
 })
 
