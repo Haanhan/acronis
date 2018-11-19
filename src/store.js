@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getAllTodos } from './apiHelper.js'
+import { getAllTodos, updateTodo, insertTodo, deleteTodo } from './apiHelper.js'
 
 Vue.use(Vuex)
 
@@ -18,19 +18,45 @@ export default new Vuex.Store({
     },
     REMOVE_TODO(state, id){
       const index = state.todoList.findIndex(x => x.id  === id);
-      state.todoList.splice(index, 1);
+      if(index >= 0)
+        state.todoList.splice(index, 1);
     },
     UPDATE_TODO(state, todo){
       const index = state.todoList.findIndex(x => x.id  === todo.id);
-      state.todoList[index] = todo;
-      state.todoList = [...state.todoList]; // allow vue to detect change
+      if(index >= 0){
+        state.todoList[index] = todo;
+        state.todoList = [...state.todoList]; // allow vue to detect change
+      }
+    },
+    SET_LOADING(state, isLoading){
+      state.isLoading = isLoading;
     }
   },
   actions: {
     getTodoList({commit}){
-      getAllTodos().then(json => {
-        commit("SET_TODOLIST", json);
-      })
+      commit("SET_LOADING", true);
+      getAllTodos()
+        .then(list => {
+          commit("SET_TODOLIST", list);
+        })
+        .finally( () => { commit("SET_LOADING", false) } )
+    },
+    addTodo({commit}, todo){
+      insertTodo(todo)
+        .then(todo => {
+          commit("ADD_TODO", todo)
+        })
+    },
+    updateTodo({commit}, todo){
+      commit("UPDATE_TODO", {...todo, isPending: true});
+      updateTodo(todo)
+        .then(todo => {
+          commit("UPDATE_TODO", todo);
+        })
+    },
+    deleteTodo({commit}, id){
+      deleteTodo(id);
+      commit("REMOVE_TODO", id);
     }
   }
 })
