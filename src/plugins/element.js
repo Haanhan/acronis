@@ -14,6 +14,7 @@ import {
     Input,
     Form,
     FormItem,
+    Loading
 } from 'element-ui'
 
 locale.use(lang)
@@ -30,3 +31,4 @@ Vue.use(Checkbox)
 Vue.use(Input)
 Vue.use(Form)
 Vue.use(FormItem)
+Vue.use(Loading)

@@ -15,7 +15,7 @@
                   btn-text="Add"
                   placeholder="What do you need to do?"></input-bar>
 
-                <el-table :show-header="false" :data="todoList">
+                <el-table :show-header="false" :data="todoList" v-loading="isLoading">
 
                   <div slot="empty">
                     Nothing to do yet. Add to get started!
@@ -80,7 +80,7 @@ export default {
     this.getTodoList()
   },
   computed:{
-    ...mapState(["todoList"])
+    ...mapState(["todoList", "isLoading"])
   },
   methods:{
     ...mapActions([
