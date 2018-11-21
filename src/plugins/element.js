@@ -10,7 +10,10 @@ import {
     Card,
     Table,
     TableColumn,
-    Checkbox
+    Checkbox,
+    Input,
+    Form,
+    FormItem,
 } from 'element-ui'
 
 locale.use(lang)
@@ -24,3 +27,6 @@ Vue.use(Card)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Checkbox)
+Vue.use(Input)
+Vue.use(Form)
+Vue.use(FormItem)

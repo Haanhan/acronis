@@ -10,30 +10,43 @@
               
               <el-card body-style="padding:0">
 
+                <input-bar slot="header" 
+                  @btn-click="addTodo"
+                  btn-text="Add"
+                  placeholder="What do you need to do?"></input-bar>
+
                 <el-table :show-header="false" :data="todoList">
 
+                  <div slot="empty">
+                    Nothing to do yet. Add to get started!
+                  </div>
+
                   <el-table-column :width="40" align="center">
-                    <template slot-scope="{row: {done}}">
-                      <checkbox :done="done"></checkbox>
+                    <template slot-scope="{row}">
+                      <checkbox :done="row.done" @click.native="setDone(row)"></checkbox>
                     </template>
                   </el-table-column>
 
-                  <el-table-column
-                    prop="text">
+                  <el-table-column>
+                    <div slot-scope="{row: {text, done}}" :class="{'done-text': done}">
+                      {{text}}
+                    </div>
                   </el-table-column>
 
-                  <el-table-column align="right" width:>
-                    <template slot-scope="{row: {id}}">
+                  <el-table-column align="right" width="90">
+                    <template slot-scope="{row: {id}}"> 
                       <el-button circle
                         size="mini" 
                         icon="el-icon-edit">
                       </el-button>
                       <el-button circle
+                        @click="deleteTodo(id)"
                         size="mini" 
                         icon="el-icon-delete"
                         type="danger">
                       </el-button>
                     </template>
+                 
                   </el-table-column>
                   
 
@@ -52,11 +65,14 @@
 <script>
 import { mapActions, mapState } from "vuex"
 import Checkbox from "@/components/Checkbox.vue"
+import InputBar from "@/components/InputBar.vue"
+
 
 export default {
   name: 'home',
   components:{
-    Checkbox
+    Checkbox,
+    InputBar
   },
   created(){
     this.getTodoList()
@@ -65,7 +81,15 @@ export default {
     ...mapState(["todoList"])
   },
   methods:{
-    ...mapActions(["getTodoList"]),
+    ...mapActions([
+      "getTodoList",
+      "addTodo",
+      "updateTodo",
+      "deleteTodo"
+      ]),
+    setDone(todo){
+      this.updateTodo({...todo, done: !todo.done});
+    },
   }
 }
 </script>

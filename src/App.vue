@@ -36,11 +36,13 @@ body{
   background: #F2F6FC;
 }
 
-#app {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50; */
+.done-text{
+  text-decoration: line-through;
+  color: #909399
+}
+
+.cell{
+  word-break: normal !important;
 }
 
 </style>
