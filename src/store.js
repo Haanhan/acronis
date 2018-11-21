@@ -54,6 +54,9 @@ export default new Vuex.Store({
         .then(todo => {
           commit("UPDATE_TODO", todo);
         })
+        .catch( e =>{
+          commit("UPDATE_TODO", {...todo, done: !todo.done, isPending: false});
+        })
     },
     deleteTodo({commit}, id){
       deleteTodo(id);

@@ -23,7 +23,9 @@
 
                   <el-table-column :width="40" align="center">
                     <template slot-scope="{row}">
-                      <checkbox :done="row.done" @click.native="setDone(row)"></checkbox>
+                      <checkbox :done="row.done" 
+                        :isLoading="row.isPending"
+                        @click.native="setDone(row)"></checkbox>
                     </template>
                   </el-table-column>
 

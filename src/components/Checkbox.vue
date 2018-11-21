@@ -3,8 +3,9 @@
     <el-button circle
     class="done-checkbox"
     size="mini" 
+    :loading="isLoading"
     :type="buttonType">
-    <i class="el-icon-check" :class="colour"></i>
+    <i class="el-icon-check" v-if="!isLoading" :class="colour"></i>
     </el-button>
 </div>
 
@@ -21,7 +22,7 @@
                 return this.done ? "" : "colour-transparent";
             },
             buttonType(){
-                return this.done ? "primary" : "";
+                return this.done && !this.isLoading ? "primary" : "";
             }
         }
     }
