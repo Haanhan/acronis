@@ -5,6 +5,7 @@ import { getAllTodos, updateTodo, insertTodo, deleteTodo } from './apiHelper.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  strict: true,
   state: {
     todoList: [],
     isLoading: false
@@ -41,8 +42,8 @@ export default new Vuex.Store({
         })
         .finally( () => { commit("SET_LOADING", false) } )
     },
-    addTodo({commit}, todo){
-      insertTodo(todo)
+    addTodo({commit}, text){
+      insertTodo({text, done: false})
         .then(todo => {
           commit("ADD_TODO", todo)
         })
