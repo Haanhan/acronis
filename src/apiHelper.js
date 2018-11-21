@@ -19,7 +19,7 @@ export const updateTodo = todo => {
 }
 
 export const deleteTodo = id => {
-    return axios.delete(`${api}/todo/id`)
+    return axios.delete(`${api}/todo/${id}`)
         .then(response => response.data)
 }
 
