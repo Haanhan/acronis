@@ -1,23 +1,20 @@
 <template>
-<div>
     <el-button circle
-    class="done-checkbox"
-    size="mini" 
-    :type="buttonType">
-    <i class="el-icon-check" :class="colour"></i>
-    </el-button>
-</div>
-
+        class="done-checkbox"
+        size="mini" 
+        :type="buttonType">
+        <i class="el-icon-check" :class="colour"></i>
+        </el-button>
 </template>
 
 <script>
     export default{
         props:{
-            done: {type: Boolean, default: false},
-            isLoading: {type: Boolean, default: false}
+            done: {type: Boolean, default: false}
         },
         computed:{
             colour(){
+                console.log(this.done);
                 return this.done ? "" : "colour-transparent";
             },
             buttonType(){
