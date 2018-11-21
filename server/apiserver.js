@@ -24,18 +24,24 @@ app.delete("/api/todo/:id", (req, res) => {
 })
 
 app.put("/api/todo", (req, res) => {
+    req.body.text = safeTrim(req.body.text);
     const todo = updateTodo(req.body);
-    todo.text = todo.text.trim();
     res.status(200).send(todo);
 })
 
 app.post("/api/todo", (req, res) => {
+    req.body.text = safeTrim(req.body.text);
     let todo = insertTodo(req.body);
-    todo.text = todo.text.trim();
     res.status(200).send(todo);
 })
 
-
+function safeTrim(text){
+    try{
+        text = text.trim();
+    }
+    catch(e){}
+    return text;
+}
 
 app.listen(8000, () => {
     console.log("Open localhost:8000"); 
