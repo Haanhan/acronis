@@ -1,15 +1,19 @@
 <template>
     <div class="inputbar">
-        <el-input class="inputbar-text" :placeholder="placeholder" :value="inputValue">
+        <el-input class="inputbar-text" 
+            @keydown.enter.native="btnClick"
+            :placeholder="placeholder" 
+            v-model="inputValue">
         </el-input>
-        <el-button slot="append" @click="btnClick" type="primary">Add</el-button>
+        <el-button slot="append" @click="btnClick" type="primary">{{btnText}}</el-button>
     </div>
 </template>
 
 <script>
 export default {
     props:{
-        placeholder: { type: String }
+        placeholder: { type: String },
+        btnText: { type: String }
     },
     data(){
         return {
@@ -18,8 +22,8 @@ export default {
     },
     methods:{
         btnClick(){
+            this.$emit("btn-click", this.inputValue);
             this.inputValue = "";
-            this.$emit("btn-click", this.inputValue)
         }
     }
 }
