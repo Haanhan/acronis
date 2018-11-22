@@ -2,7 +2,13 @@
   <div id="app">
      <el-container>
         <el-main>
-          <router-view/>
+  
+          <el-row type="flex" justify="space-around">
+              <el-col :lg="14">
+                <router-view/>
+              </el-col>
+          </el-row>
+
         </el-main>
      </el-container>
   </div>
