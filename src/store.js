@@ -8,7 +8,8 @@ export default new Vuex.Store({
   strict: true,
   state: {
     todoList: [],
-    isLoading: false
+    isLoading: false,
+    title: "",
   },
   mutations: {
     SET_TODOLIST(state, todoList){
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     SET_LOADING(state, isLoading){
       state.isLoading = isLoading;
+    },
+    SET_TITLE(state, title){
+      state.title = title;
     }
   },
   actions: {

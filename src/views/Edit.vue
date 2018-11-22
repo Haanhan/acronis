@@ -1,8 +1,7 @@
 <template>
   <div class="about">
-    <h1>Edit To-do</h1>
     <el-card  v-loading="isLoading">
-      <h3>New value</h3>
+      <label>New value</label>
       <el-form>
         <el-form-item>
           <el-input v-model="todo.text"></el-input>
@@ -31,6 +30,8 @@ export default {
     ...mapState(["isLoading"])
   },
   created(){
+    this.SET_TITLE("Edit")
+
     if(this.$route.params.todo && this.$route.params.todo.id === this.$route.params.id){
       this.todo = this.$route.params.todo;
     }
@@ -42,7 +43,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(["SET_LOADING"]),
+    ...mapMutations(["SET_TITLE"]),
     goToMain(){
       this.$router.push({ name: "home", params: { preventLoad: true }})
     },

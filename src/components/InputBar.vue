@@ -1,11 +1,19 @@
 <template>
     <div class="inputbar">
+
         <el-input class="inputbar-text" 
             @keydown.enter.native="btnClick"
             :placeholder="placeholder" 
             v-model="inputValue">
         </el-input>
-        <el-button slot="append" @click="btnClick" type="primary">{{btnText}}</el-button>
+
+        <el-button slot="append" 
+            :disabled="inputValue === ''" 
+            @click="btnClick" 
+            type="primary">
+            {{btnText}}
+        </el-button>
+        
     </div>
 </template>
 

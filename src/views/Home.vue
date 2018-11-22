@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-
-    <h1>To-do App</h1>
           
     <el-card body-style="padding:0">
 
@@ -60,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex"
+import { mapActions, mapState, mapMutations } from "vuex"
 import Checkbox from "@/components/Checkbox.vue"
 import InputBar from "@/components/InputBar.vue"
 
@@ -72,6 +70,8 @@ export default {
     InputBar
   },
   created(){
+    this.SET_TITLE("To-do App")
+
     if(!this.$route.params.preventLoad || this.todoList.length === 0)
       this.getTodoList()
   },
@@ -79,6 +79,7 @@ export default {
     ...mapState(["todoList", "isLoading"])
   },
   methods:{
+    ...mapMutations(["SET_TITLE"]),
     ...mapActions([
       "getTodoList",
       "addTodo",
