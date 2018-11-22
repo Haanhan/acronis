@@ -1,66 +1,65 @@
 <template>
   <div class="home">
-    <el-container>
-      <el-main>
           
-          <el-row type="flex" justify="space-around">
-            <el-col :lg="14">
+    <el-row type="flex" justify="space-around">
+        <el-col :lg="14">
+          
+          <h1>To-do App</h1>
+          
+          <el-card body-style="padding:0">
+
+            <input-bar slot="header" 
+              @btn-click="addTodo"
+              btn-text="Add"
+              placeholder="What do you need to do?"></input-bar>
+
+            <el-table :show-header="false" :data="todoList" v-loading="isLoading">
+
+              <div slot="empty">
+                Nothing to do yet. Add to get started!
+              </div>
+
+              <el-table-column :width="40" align="center">
+                <template slot-scope="{row}">
+                  <checkbox :done="row.done" 
+                    :isLoading="row.isPending"
+                    @click.native="setDone(row)"></checkbox>
+                </template>
+              </el-table-column>
+
+              <el-table-column>
+                <div slot-scope="{row: {text, done}}" :class="{'done-text': done}">
+                  {{text}}
+                </div>
+              </el-table-column>
+
+              <el-table-column align="right" width="90">
+                <template slot-scope="{row: {id}}"> 
+
+                  <el-button circle
+                    @click="goToEdit(id)"
+                    size="mini" 
+                    icon="el-icon-edit">
+                  </el-button>
+
+                  <el-button circle
+                    @click="deleteTodo(id)"
+                    size="mini" 
+                    icon="el-icon-delete"
+                    type="danger">
+                  </el-button>
+
+                </template>
+              </el-table-column>
               
-              <h1>To-do App</h1>
-              
-              <el-card body-style="padding:0">
 
-                <input-bar slot="header" 
-                  @btn-click="addTodo"
-                  btn-text="Add"
-                  placeholder="What do you need to do?"></input-bar>
+            </el-table>
 
-                <el-table :show-header="false" :data="todoList" v-loading="isLoading">
+          </el-card>
 
-                  <div slot="empty">
-                    Nothing to do yet. Add to get started!
-                  </div>
+        </el-col>
+    </el-row>
 
-                  <el-table-column :width="40" align="center">
-                    <template slot-scope="{row}">
-                      <checkbox :done="row.done" 
-                        :isLoading="row.isPending"
-                        @click.native="setDone(row)"></checkbox>
-                    </template>
-                  </el-table-column>
-
-                  <el-table-column>
-                    <div slot-scope="{row: {text, done}}" :class="{'done-text': done}">
-                      {{text}}
-                    </div>
-                  </el-table-column>
-
-                  <el-table-column align="right" width="90">
-                    <template slot-scope="{row: {id}}"> 
-                      <el-button circle
-                        size="mini" 
-                        icon="el-icon-edit">
-                      </el-button>
-                      <el-button circle
-                        @click="deleteTodo(id)"
-                        size="mini" 
-                        icon="el-icon-delete"
-                        type="danger">
-                      </el-button>
-                    </template>
-                 
-                  </el-table-column>
-                  
-
-                </el-table>
-
-              </el-card>
-
-            </el-col>
-        </el-row>
-
-      </el-main>
-    </el-container>
   </div>
 </template>
 
@@ -90,8 +89,11 @@ export default {
       "deleteTodo"
       ]),
     setDone(todo){
-      this.updateTodo({...todo, done: !todo.done});
+      this.updateTodo({...todo, done: !todo.done})
     },
+    goToEdit(id){
+      this.$router.push({ name: "edit", params: {id} })
+    }
   }
 }
 </script>
