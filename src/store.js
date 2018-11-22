@@ -37,7 +37,7 @@ export default new Vuex.Store({
     getTodoList({commit}){
       commit("SET_LOADING", true);
       getAllTodos()
-        .then(list => {
+        .then(list => { 
           commit("SET_TODOLIST", list);
         })
         .finally( () => { commit("SET_LOADING", false) } )
@@ -51,7 +51,7 @@ export default new Vuex.Store({
     updateTodo({commit}, todo){
       commit("UPDATE_TODO", {...todo, isPending: true});
       updateTodo(todo)
-        .then(todo => {
+        .then(todo => { 
           commit("UPDATE_TODO", todo);
         })
         .catch( e =>{
