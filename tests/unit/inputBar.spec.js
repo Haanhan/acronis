@@ -56,8 +56,12 @@ describe("InputBar", () => {
     wrapper.setData({ inputValue })
     wrapper.find(Button).trigger("click");
 
-    expect(wrapper.emitted("btn-click")).toBeTruthy()
-    expect(wrapper.emitted("btn-click")[0]).toEqual([inputValue])
+    localVue.nextTick(()=>{
+      expect( wrapper.find(Button).element.disabled).toBe(false);
+      expect(wrapper.emitted("btn-click")).toBeTruthy()
+      expect(wrapper.emitted("btn-click")[0]).toEqual([inputValue])
+    })
+
   });
 
 })
