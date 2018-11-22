@@ -39,7 +39,7 @@
             </el-button>
 
             <el-button circle
-              @click="deleteTodo(id)"
+              @click="deleteTodo(row.id)"
               size="mini" 
               icon="el-icon-delete"
               type="danger">

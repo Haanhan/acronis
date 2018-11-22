@@ -2,7 +2,7 @@
   <div class="about">
     <el-card  v-loading="isLoading">
       <label>New value</label>
-      <el-form>
+      <el-form @submit.native.prevent>
         <el-form-item>
           <el-input v-model="todo.text"></el-input>
         </el-form-item>
@@ -33,7 +33,7 @@ export default {
     this.SET_TITLE("Edit")
 
     if(this.$route.params.todo && this.$route.params.todo.id === this.$route.params.id){
-      this.todo = this.$route.params.todo;
+      this.todo = {...this.$route.params.todo};
     }
     else{
       this.SET_LOADING(true);
@@ -43,7 +43,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(["SET_TITLE"]),
+    ...mapMutations(["SET_LOADING", "SET_TITLE"]),
     goToMain(){
       this.$router.push({ name: "home", params: { preventLoad: true }})
     },
