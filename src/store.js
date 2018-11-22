@@ -48,14 +48,15 @@ export default new Vuex.Store({
           commit("ADD_TODO", todo)
         })
     },
-    updateTodo({commit}, todo){
+    updateTodo({commit, state}, todo){
+      let oldTodo = state.todoList.find(x => x.id  === todo.id);
       commit("UPDATE_TODO", {...todo, isPending: true});
       updateTodo(todo)
         .then(todo => { 
           commit("UPDATE_TODO", todo);
         })
         .catch( e =>{
-          commit("UPDATE_TODO", {...todo, done: !todo.done, isPending: false});
+          commit("UPDATE_TODO", {...oldTodo, isPending: false});
         })
     },
     deleteTodo({commit}, id){

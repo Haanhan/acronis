@@ -46,8 +46,10 @@ body{
   background: #F2F6FC;
 }
 
-.done-text{
+.strikeout{
   text-decoration: line-through;
+}
+.text-lighter{
   color: #909399
 }
 

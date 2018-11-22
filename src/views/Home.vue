@@ -25,16 +25,17 @@
         </el-table-column>
 
         <el-table-column>
-          <div slot-scope="{row: {text, done}}" :class="{'done-text': done}">
+          <div slot-scope="{row: {text, done, isPending}}" 
+            :class="{'strikeout': done, 'text-lighter': done || isPending }">
             {{text}}
           </div>
         </el-table-column>
 
         <el-table-column align="right" width="90">
-          <template slot-scope="{row: {id}}"> 
+          <template slot-scope="{row}"> 
 
             <el-button circle
-              @click="goToEdit(id)"
+              @click="goToEdit(row)"
               size="mini" 
               icon="el-icon-edit">
             </el-button>
@@ -71,7 +72,8 @@ export default {
     InputBar
   },
   created(){
-    this.getTodoList()
+    if(!this.$route.params.preventLoad || this.todoList.length === 0)
+      this.getTodoList()
   },
   computed:{
     ...mapState(["todoList", "isLoading"])
@@ -86,8 +88,11 @@ export default {
     setDone(todo){
       this.updateTodo({...todo, done: !todo.done})
     },
-    goToEdit(id){
-      this.$router.push({ name: "edit", params: {id} })
+    goToEdit(todo){
+      this.$router.push({ 
+        name: "edit", 
+        params: {id: todo.id, todo}
+      })
     }
   }
 }
