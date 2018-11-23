@@ -1,12 +1,17 @@
 const express = require('express')
-// const history = require('connect-history-api-fallback');
 const cors = require('cors');
 const {getTodo, getAllTodos , updateTodo, deleteTodo, insertTodo} = require("./apitasks");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-// app.use(history());
+
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("/", (req, res) => {
+    res.sendFile("index.html")
+})
 
 app.get("/api/todos", (req, res) => {
     const todos = getAllTodos();
@@ -45,5 +50,4 @@ function safeTrim(text){
 
 app.listen(8000, () => {
     console.log("Open localhost:8000"); 
-    // opn('http://localhost:8000');
 });
