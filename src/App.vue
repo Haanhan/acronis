@@ -31,6 +31,7 @@ export default {
 <style lang="scss">
 
 @import "element-ui/packages/theme-chalk/src/common/var.scss";
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
 
 $topbar-padding: 20px;
 $topbar-font-size: $--font-size-large;
@@ -41,6 +42,7 @@ body{
   background: $--border-color-extra-light;
   padding: 0;
   margin: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif
 }
 
 .strikeout{
