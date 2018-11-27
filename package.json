@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "server": "nodemon ./server/apiserver.js --ignore *.json --verbose",
+    "serverDev": "nodemon ./server/apiserver.js --ignore *.json --verbose",
+    "server": "node ./server/apiserver.js",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
